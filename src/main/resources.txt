@@ -1,0 +1,25 @@
+            // Wait for the page to load and display the products
+            WebDriverWait wait = new WebDriverWait(driver, 20);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".product"))).click();
+
+            // Click on the first product to navigate to the product page
+            WebElement firstProduct = driver.findElement(By.cssSelector(".product"));
+            firstProduct.click();
+
+            // Wait for the product page to load and display the Add to Cart or Pre-order button
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".add-to-cart")));
+
+            // Click on the Add to Cart or Pre-order button
+            WebElement addToCartButton = driver.findElement(By.cssSelector(".add-to-cart"));
+            addToCartButton.click();
+
+            // Wait for the popup modal and click on the Checkout Now button
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkoutnow")));
+            WebElement checkoutNowButton = driver.findElement(By.id("checkoutnow"));
+            checkoutNowButton.click();
+
+            // Wait for the navigation to the login page
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login")));
+
+            // Verify that the login page is displayed
+            System.out.println("Navigated to Login page: " + driver.getTitle());
