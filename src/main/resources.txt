@@ -1,21 +1,24 @@
             // Wait for the page to load and display the products
             WebDriverWait wait = new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".product"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".col-6.col-md-4.results-per-page")));
 
-            // Click on the first product to navigate to the product page
-            WebElement firstProduct = driver.findElement(By.cssSelector(".product"));
-            firstProduct.click();
+            // Find the first product's container
+            WebElement firstProductContainer = driver.findElement(By.cssSelector(".col-6.col-md-4.results-per-page"));
+
+            // Find the anchor tag inside the product's container and click on it
+            WebElement productLink = firstProductContainer.findElement(By.cssSelector("a[href^='/store/product/']"));
+            productLink.click();
 
             // Wait for the product page to load and display the Add to Cart or Pre-order button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".add-to-cart")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".button-container .add-to-cart")));
 
             // Click on the Add to Cart or Pre-order button
-            WebElement addToCartButton = driver.findElement(By.cssSelector(".add-to-cart"));
+            WebElement addToCartButton = driver.findElement(By.cssSelector(".button-container .add-to-cart"));
             addToCartButton.click();
 
             // Wait for the popup modal and click on the Checkout Now button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkoutnow")));
-            WebElement checkoutNowButton = driver.findElement(By.id("checkoutnow"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".button-container.add-to-cart-btns #atg_button_checkout")));
+            WebElement checkoutNowButton = driver.findElement(By.cssSelector(".button-container.add-to-cart-btns #atg_button_checkout"));
             checkoutNowButton.click();
 
             // Wait for the navigation to the login page
